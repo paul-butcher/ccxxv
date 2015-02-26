@@ -166,6 +166,7 @@ class Solver(object):
             return _make_letter_groups(candidate_chars, crosses[0], words0, crosses[1], words1)
         return {}
 
+
 def _find_crossing_points(pattern0, pattern1):
     crosses = (pattern0.find('+'), pattern1.find('+'))
     if -1 in crosses:
@@ -198,22 +199,43 @@ def _chars_at(position, words):
 def print_groups(groups):
     for key, value in groups.items():
         print(key)
-        index = 0
         if len(value[0]) >= len(value[1]):
-            for index, word in enumerate(value[1]):
-                print(value[0][index] + '\t' + word)
-
-            for word in value[0][index+1:]:
-                print(word)
+            _print_group_shorter_or_equal(value[0], value[1])
         else:
-            longest = 0
-            for index, word in enumerate(value[0]):
-                print(word + '\t' + value[1][index])
-                length = len(word)
-                if length > longest:
-                    longest = length
+            _print_group_longer(value[0], value[1])
 
-            format_string = "{0:%s}\t{1}" % longest
-            for i in xrange(index, len(value[1])):
-                print(format_string.format(' ', value[1][i]))
 
+def _print_group_shorter_or_equal(lhs, rhs):
+    """
+    groups are output as two colums, tab-separated.
+
+    >>> _print_group_shorter_or_equal(['grate', 'grand', 'great'], ['dog', 'bog']) # doctest: +NORMALIZE_WHITESPACE
+    grate dog
+    grand bog
+    great
+    """
+    index = 0
+    for index, word in enumerate(rhs):
+        print(lhs[index] + '\t' + word)
+
+    print('\n'.join(lhs[index+1:]))
+
+
+def _print_group_longer(lhs, rhs):
+    """
+    When the left hand side is shorter, it is still printed in two tab-separated
+    columns but the right-hand column stays aligned even after the left hand column
+    has run out.
+
+    >>> _print_group_longer(['dog', 'bog'], ['grate', 'grand', 'great']) # doctest: +NORMALIZE_WHITESPACE
+    dog grate
+    bog grand
+        great
+    """
+    index = 0
+    lhs_column_width = len(lhs[0])
+    for index, word in enumerate(lhs):
+        print(word + '\t' + rhs[index])
+
+    format_string = "{0:%s}\t{1}" % lhs_column_width
+    print('\n'.join((format_string.format(' ', word) for word in rhs[index + 1:])))
