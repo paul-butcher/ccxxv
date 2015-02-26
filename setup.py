@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ccxxv',
-    version='0.1.2',
+    version='0.1.3',
     description='Crossword solving assistant',
     author='Paul Butcher',
     license='LGPL-3',
