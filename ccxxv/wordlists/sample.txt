@@ -1,0 +1,6 @@
+This is a sample wordlist file.
+Each line below represents a single entry in the wordlist
+Finish the file with an empty line.
+--------------------------------------------------------------------
+Hello
+World
