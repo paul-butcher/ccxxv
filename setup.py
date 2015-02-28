@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ccxxv',
-    version='0.1.3',
+    version='0.1.4',
     description='Crossword solving assistant',
     author='Paul Butcher',
     license='LGPL-3',
@@ -11,6 +11,7 @@ setup(
         'console_scripts': ['ccxxv = ccxxv:cli_main']
     },
     package_data={'ccxxv': ['wordlists/*']},
+    url='https://github.com/paul-butcher/ccxxv',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',

@@ -24,10 +24,11 @@ class Solver(object):
     """
     A crossword solving assistant.
 
-    :param wordlist: The wordlist to use, either the name of the wordlist,
-      or an iterable of strings.
+    :param wordlist: (optional) The wordlist to use - a string with each entry on a new line
+    :param wordlist_name: (optional) The wordlist to use - corresponds to a file in the wordlists directory.
 
-    The solver uses the UK Advanced Cryptics dictionary by default.
+
+    If neither parameter is specified, the solver uses the UK Advanced Cryptics dictionary by default.
     This dictionary contains various proper nouns common in crosswords
     as well as words normally considered legal in word games such as Scrabble.
 
